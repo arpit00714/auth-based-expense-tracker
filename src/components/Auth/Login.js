@@ -19,7 +19,7 @@ const Login = () => {
         const enteredPassword = passwordInputRef.current.value;
 
         let url =
-            'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBLAZfI3knkbyxNuEyi2t-QrjiOXbPCZVc';
+            'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyB0a1CXL6SvaRj0wzPycig1PD6v5LNdXg8';
 
         if (enteredEmail != '' && enteredPassword != '') {
 
@@ -50,7 +50,9 @@ const Login = () => {
                 })
                 .then(data => {
                     setToken(data.idToken)
-                    navigate('/')
+                    // navigate('/')
+                    localStorage.setItem('token',data.idToken)
+                    navigate('/home')
                 })
                 .catch((err) => {
                     alert(err.message);
@@ -82,7 +84,7 @@ const Login = () => {
                     <button
                         type='submit'
                         className={classes.toggle}
-                        onClick={submitHandler}
+                        // onClick={submitHandler}
                     >
                         Login
                     </button>
