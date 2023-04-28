@@ -1,11 +1,14 @@
 import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import classes from './auth.module.css';
 
 const Signup = () => {
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
-  const passConfirmRef = useRef()
+  const passConfirmRef = useRef();
+  const navigate = useNavigate();
+
 
   // const [isLogin, setIsLogin] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
@@ -43,6 +46,7 @@ const Signup = () => {
           setIsLoading(false);
           if (res.ok) {
              console.log('User has successfully signed up')
+             navigate('/')
           } else {
             return res.json().then(() => {
               let errorMessage = 'Signup failed'
@@ -93,7 +97,8 @@ const Signup = () => {
             >
               Create new account
             </button>
-            <p>Already have an account ? <Link to={'/login'}>Login...</Link></p>
+            {/* <p>Already have an account ? <Link to={'/login'}>Login...</Link></p> */}
+            <p>Already have an account ? <Link to={'/'}>Login...</Link></p>
             
           </div>
         </form>
