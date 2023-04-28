@@ -34,7 +34,7 @@ const Login = () => {
           const res = await fetch(url, options)
           const data = await res.json()
           setIsLoading(false)
-          navigate('/')
+          navigate('/login')
         } catch (error) {
           console.error(error)
         }
@@ -80,7 +80,7 @@ const Login = () => {
                     setToken(data.idToken)
                     // navigate('/')
                     localStorage.setItem('token',data.idToken)
-                    navigate('/home')
+                    navigate('/')
                 })
                 .catch((err) => {
                     alert(err.message);

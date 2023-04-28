@@ -1,9 +1,10 @@
 // import React from 'react';
 // import { Link } from 'react-router-dom';
-import {useState, useContext} from 'react';
+import {useState, useContext, useEffect} from 'react';
 import {AuthContext} from '../context/authContext';
 import UpdateProfile from './Auth/UpdateProfile';
 import { useNavigate } from 'react-router-dom';
+import Expenses from './Expense/Expenses';
 
 function Home() {
   const navigate = useNavigate();
@@ -12,10 +13,16 @@ function Home() {
 
   const {token, setToken} = useContext(AuthContext);
 
+  useEffect(() => {
+    if (!token) {
+      navigate('/login')
+    }
+  }, []);
+
   const handleLogout = () => {
     localStorage.removeItem('token')
     setToken('')
-    navigate('/')
+    navigate('/login')
   }
 
   const handleClick = async () => {
@@ -56,6 +63,7 @@ function Home() {
       {/* <p>Your Profile is Incomplete. <Link to="/update">Complete Now</Link></p> */}
       <p>Your Profile is Incomplete. <a href='#' onClick={() => setShow(prev => !prev)}>Complete Now</a></p>
       </div>
+      <Expenses />
     {show && <UpdateProfile />}
     </>
   )
