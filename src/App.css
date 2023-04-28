@@ -9,3 +9,16 @@ body {
   gap: 6rem;
   margin: 2rem auto;
 }
+
+
+button {
+  cursor: pointer;
+  font: inherit;
+  height: max-content;
+  border-radius: 100px;
+  color: #333;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 0.5rem 1.5rem;
+  background-color: white;
+}

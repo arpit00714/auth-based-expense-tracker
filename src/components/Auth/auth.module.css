@@ -42,7 +42,7 @@
     align-items: center;
   }
 
-  .actions button {
+  /* .actions button {
     cursor: pointer;
     font: inherit;
     border-radius: 100px;
@@ -50,4 +50,4 @@
     padding: 0.5rem 1.5rem;
     background-color: white;
     border: 1px solid cornflowerblue;
-  }
+  } */
