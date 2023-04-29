@@ -1,4 +1,5 @@
-import { useState } from "react"
+import { useState } from "react";
+
 
 const ExpenseForm = ({addExpense}) => {
     const [enteredAmount, setAmount] = useState('')
@@ -7,12 +8,21 @@ const ExpenseForm = ({addExpense}) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        const obj = {
-            amount: enteredAmount,
-            description: enteredDesc,
-            category : category
+        // const obj = {
+        //     amount: enteredAmount,
+        //     description: enteredDesc,
+        //     category : category
+        // }
+        // addExpense(obj)
+        if (enteredAmount !== '' && enteredDesc !== '' && category !== '') {
+
+            const obj = {
+                amount: enteredAmount,
+                description: enteredDesc,
+                category : category
+            }
+            addExpense(obj)
         }
-        addExpense(obj)
 
     }
 
@@ -30,15 +40,15 @@ const ExpenseForm = ({addExpense}) => {
 
                 <div className="new-expense__control">
                     <label htmlFor="amount">Amount </label>
-                    <input value={enteredAmount} onChange={handleChange} name="amount" type="number" />
+                    <input value={enteredAmount} onChange={handleChange} name="amount" type="number" min={10} required />
                 </div>
                 <div className="new-expense__control">
                     <label htmlFor="title">Description </label>
-                    <input value={enteredDesc} onChange={handleChange} name="description" type="text" />
+                    <input value={enteredDesc} onChange={handleChange} name="description" type="text" required minLength={6} />
                 </div>
                 <div className="new-expense__control">
                     <label htmlFor="category"> Select Your Category </label>
-                    <select value={category} name="category" onChange={handleChange}>
+                    <select value={category} name="category" onChange={handleChange} required>
                         <option value="fuel">fuel</option>
                         <option value="food">food</option>
                         <option value="electricity">electricity</option>
