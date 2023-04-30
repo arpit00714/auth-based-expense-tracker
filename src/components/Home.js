@@ -7,6 +7,7 @@ import { authActions } from '../store/auth';
 import UpdateProfile from './Auth/UpdateProfile';
 import { useNavigate } from 'react-router-dom';
 import Expenses from './Expense/Expenses';
+import { themeActions } from '../store/theme';
 
 function Home() {
   const navigate = useNavigate();
@@ -15,6 +16,8 @@ function Home() {
 
   // const {token, setToken} = useContext(AuthContext);
   const token = useSelector(state => state.auth.token)
+  const isDark = useSelector(state => state.theme.isDark)
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -22,6 +25,11 @@ function Home() {
       navigate('/login')
     }
   }, []);
+
+  const onClick = () => {
+    dispatch(themeActions.darkMode())
+  };
+
 
   const handleLogout = () => {
     localStorage.removeItem('token')
@@ -67,6 +75,7 @@ function Home() {
         </div>
       {/* <p>Your Profile is Incomplete. <Link to="/update">Complete Now</Link></p> */}
       <p>Your Profile is Incomplete. <a href='#' onClick={() => setShow(prev => !prev)}>Complete Now</a></p>
+      <button onClick={onClick}>Toggle Theme</button>
       </div>
       <Expenses />
     {show && <UpdateProfile />}
