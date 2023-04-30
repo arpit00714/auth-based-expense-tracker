@@ -1,14 +1,16 @@
-import {useRef, useEffect, useContext} from 'react'
+import {useRef, useEffect} from 'react'
 import classes from './auth.module.css';
 // import { Button, Form, Input } from 'antd';
-import { AuthContext } from '../../context/authContext';
+// import { AuthContext } from '../../context/authContext';
+import { useSelector } from 'react-redux';
 
 
 function UpdateProfile() {
     const enteredNameRef = useRef()
     const enteredUrlRef = useRef()
 
-    const { token } = useContext(AuthContext)
+    // const { token } = useContext(AuthContext)
+    const token = useSelector(state => state.auth.token)
 
     useEffect(() => {
         getData()

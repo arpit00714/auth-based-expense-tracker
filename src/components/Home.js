@@ -1,7 +1,9 @@
 // import React from 'react';
 // import { Link } from 'react-router-dom';
-import {useState, useContext, useEffect} from 'react';
-import {AuthContext} from '../context/authContext';
+import {useState, useEffect} from 'react';
+import { useDispatch, useSelector } from 'react-redux'
+// import {AuthContext} from '../context/authContext';
+import { authActions } from '../store/auth';
 import UpdateProfile from './Auth/UpdateProfile';
 import { useNavigate } from 'react-router-dom';
 import Expenses from './Expense/Expenses';
@@ -11,7 +13,9 @@ function Home() {
 
   const [show, setShow] = useState(false);
 
-  const {token, setToken} = useContext(AuthContext);
+  // const {token, setToken} = useContext(AuthContext);
+  const token = useSelector(state => state.auth.token)
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (!token) {
@@ -21,7 +25,8 @@ function Home() {
 
   const handleLogout = () => {
     localStorage.removeItem('token')
-    setToken('')
+    // setToken('')
+    dispatch(authActions.logout())
     navigate('/login')
   }
 

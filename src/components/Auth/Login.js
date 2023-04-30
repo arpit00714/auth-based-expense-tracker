@@ -1,11 +1,15 @@
-import { useState, useRef, useContext } from 'react';
+import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+
+import { authActions } from '../../store/auth';
 import classes from './auth.module.css';
-import { AuthContext } from '../../context/authContext';
+// import { AuthContext } from '../../context/authContext';
 
 const Login = () => {
-    const {token,setToken} = useContext(AuthContext);
+    // const {token,setToken} = useContext(AuthContext);
+        const dispatch = useDispatch()
     const navigate = useNavigate();
 
     const emailInputRef = useRef();
@@ -77,8 +81,8 @@ const Login = () => {
                     }
                 })
                 .then(data => {
-                    setToken(data.idToken)
-                    // navigate('/')
+                    // setToken(data.idToken)
+                    dispatch(authActions.login(data.idToken))
                     localStorage.setItem('token',data.idToken)
                     navigate('/')
                 })
