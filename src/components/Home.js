@@ -15,13 +15,12 @@ function Home() {
   const [show, setShow] = useState(false);
 
   // const {token, setToken} = useContext(AuthContext);
-  const token = useSelector(state => state.auth.token)
-  const isDark = useSelector(state => state.theme.isDark)
+  const user = useSelector(state => state.auth.user)
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!token) {
+    if (!user) {
       navigate('/login')
     }
   }, []);
@@ -32,7 +31,7 @@ function Home() {
 
 
   const handleLogout = () => {
-    localStorage.removeItem('token')
+    // localStorage.removeItem('token')
     // setToken('')
     dispatch(authActions.logout())
     navigate('/login')
@@ -44,7 +43,7 @@ function Home() {
       method: 'POST',
       body: JSON.stringify({
         requestType: 'VERIFY_EMAIL',
-        idToken: token,
+        idToken: user.idToken,
       }),
       headers: {
         'Content-Type': 'application/json',
@@ -77,8 +76,9 @@ function Home() {
       <p>Your Profile is Incomplete. <a href='#' onClick={() => setShow(prev => !prev)}>Complete Now</a></p>
       <button onClick={onClick}>Toggle Theme</button>
       </div>
-      <Expenses />
+      
     {show && <UpdateProfile />}
+      <Expenses />
     </>
   )
 }

@@ -4,7 +4,7 @@ import { useState } from "react";
 const ExpenseForm = ({addExpense}) => {
     const [enteredAmount, setAmount] = useState('')
     const [enteredDesc, setDesc] = useState('')
-    const [category, setCategory] = useState('')
+    const [category, setCategory] = useState('fuel')
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -14,7 +14,7 @@ const ExpenseForm = ({addExpense}) => {
         //     category : category
         // }
         // addExpense(obj)
-        if (enteredAmount !== '' && enteredDesc !== '' && category !== '') {
+        if (enteredAmount !== '' && enteredDesc !== '' ) {
 
             const obj = {
                 amount: enteredAmount,
@@ -22,6 +22,8 @@ const ExpenseForm = ({addExpense}) => {
                 category : category
             }
             addExpense(obj)
+            setAmount('')
+            setDesc('')
         }
 
     }

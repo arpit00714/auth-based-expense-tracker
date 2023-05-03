@@ -11,16 +11,21 @@ function Expenses() {
   //         amount: 200,
   //         description: 'some description',
   //         category: 'dummy category'
-  const url =
-    "https://ecommerce-website-9cea4-default-rtdb.firebaseio.com/expenses.json";
+ 
 
   // const [expenses, setExpenses] = useState([]);
   const expenses = useSelector((state) => state.expense.expenses);
-  const dispatch = useDispatch();
+    const user = useSelector(state => state.auth.user)
+    const dispatch = useDispatch()
+    const userEmail = user.email?.replace(/\.|@/g, "")
+  
 
   const [show, setShow] = useState(false);
   const [id, setId] = useState("");
   const [data, setData] = useState({});
+
+  const url =
+  `https://ecommerce-website-9cea4-default-rtdb.firebaseio.com/${userEmail}/expenses.json`;
 
   useEffect(() => {
     getExpenses();
@@ -82,7 +87,7 @@ function Expenses() {
 
   const getData = (id) => {
     fetch(
-      `https://fir-99cf8-default-rtdb.asia-southeast1.firebasedatabase.app/expenses/${id}.json`
+      `https://ecommerce-website-9cea4-default-rtdb.firebaseio.com/${userEmail}/expenses/${id}.json`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -106,9 +111,7 @@ function Expenses() {
       //     console.log(expense, expenses)
       const res = await fetch(url, options);
       const data = await res.json();
-      // getExpenses()
-      //   setExpenses([...expenses, expense]);
-      console.log(data);
+      
 
       getExpenses();
     } catch (error) {
@@ -118,7 +121,7 @@ function Expenses() {
 
   const deleteExpense = (id) => {
     fetch(
-      `https://fir-99cf8-default-rtdb.asia-southeast1.firebasedatabase.app/expenses/${id}.json`,
+      `https://ecommerce-website-9cea4-default-rtdb.firebaseio.com/${userEmail}/expenses/${id}.json`,
       {
         method: "DELETE",
       }
@@ -132,7 +135,7 @@ function Expenses() {
 
   const editExpense = (expense, id) => {
     fetch(
-      `https://fir-99cf8-default-rtdb.asia-southeast1.firebasedatabase.app/expenses/${id}.json`,
+      `https://ecommerce-website-9cea4-default-rtdb.firebaseio.com/${userEmail}/expenses/${id}.json`,
       {
         method: "PATCH",
         body: JSON.stringify(expense),
@@ -179,7 +182,7 @@ function Expenses() {
           {" "}
           Download File
         </a>
-        {amount > 1000 && (
+        {amount >= 1000 && (
           <button onClick={setDarkMode}>Activate Premium</button>
         )}
       </div>

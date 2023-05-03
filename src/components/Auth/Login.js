@@ -82,8 +82,9 @@ const Login = () => {
                 })
                 .then(data => {
                     // setToken(data.idToken)
-                    dispatch(authActions.login(data.idToken))
-                    localStorage.setItem('token',data.idToken)
+                    // dispatch(authActions.login(data.idToken))
+                    // localStorage.setItem('token',data.idToken)
+                    dispatch(authActions.login(data))
                     navigate('/')
                 })
                 .catch((err) => {
@@ -114,7 +115,7 @@ const Login = () => {
                     />
                 </div>
                 <div className={classes.actions}>
-                <p><a href="#" onClick={() => setShow(show => !show)}> Forgot your Password ?</a></p>
+                <p className={classes.SgnUp}><a href="#" onClick={() => setShow(show => !show)}> Forgot your Password ?</a></p>
 
                 {isLoading && <p>Sending request...</p>}
                 <button
@@ -123,7 +124,7 @@ const Login = () => {
                 >
                     Login
                 </button>
-                <p>Or <Link to={'/signup'}>Signup...</Link></p>
+                <p className={classes.SgnUp}>Or <Link to={'/signup'}>Signup...</Link></p>
 
             </div>
             </>
